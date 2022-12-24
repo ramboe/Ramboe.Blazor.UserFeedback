@@ -1,0 +1,34 @@
+﻿
+@if (Target.FeedbackModel.ShowSuccessMessage)
+{
+    <SuccessMessage SuccessStatusText="@Target.FeedbackModel.SuccessStatusText" />
+}
+
+@if (Target.FeedbackModel.ShowErrorMessage)
+{
+    <ErrorMessage Status="@Target.FeedbackModel.Error" MaxWith="@ErrorMaxWidth" MarginBottom="@ErrorMarginBottom" />
+}
+
+@if (Target.FeedbackModel.ShowContent)
+{
+    if (Target.FeedbackModel.ShowAlertMessage)
+    {
+        <AlertMessage Text="@Target.FeedbackModel.AlertStatusText" />
+    }
+
+    @ChildContent
+}
+else
+{
+    if (Target.FeedbackModel.ShowSpinner)
+    {
+        <Spinner SpinnerSizeInRem="@SpinnerSizeInRem" SpinnerMargin="@SpinnerMargin" ColorString="@ColorString" />
+
+        if (!string.IsNullOrEmpty(Target.FeedbackModel.LoadingMessage))
+        {
+            <span style="text-align: center">
+                <p style="margin-top: 2.2rem">@Target.FeedbackModel.LoadingMessage</p>
+            </span>
+        }
+    }
+}
