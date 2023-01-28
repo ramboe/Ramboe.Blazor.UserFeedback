@@ -5,30 +5,38 @@ namespace Ramboe.Blazor.UserFeedback;
 
 public partial class FeedbackArea
 {
-    [Parameter] public string SpinnerSizeInRem { get; set; }
+    [Parameter]
+    public string SpinnerSizeInRem { get; set; }
 
-    [Parameter] public SpinnerSizeMode SpinnerSize { get; set; } = SpinnerSizeMode.Medium;
+    [Parameter]
+    public SpinnerSizeMode SpinnerSize { get; set; } = SpinnerSizeMode.Medium;
 
-    [Parameter] public ColorMode Color { get; set; } = ColorMode.DarkGrey;
+    [Parameter]
+    public ColorMode Color { get; set; } = ColorMode.DarkGrey;
 
-    [Parameter] public string ColorString { get; set; }
+    [Parameter]
+    public string ColorString { get; set; }
 
-    [Parameter] public string SpinnerMargin { get; set; } = "auto"; // "200px";
+    [Parameter]
+    public string SpinnerMargin { get; set; } = "auto"; // "200px";
 
-    [Parameter] public string ErrorMaxWidth { get; set; } = "100%";
+    [Parameter]
+    public string ErrorMaxWidth { get; set; } = "100%";
 
-    [Parameter] public string ErrorMarginBottom { get; set; } = string.Empty;
+    [Parameter]
+    public string ErrorMarginBottom { get; set; } = string.Empty;
 
-    [Parameter] public RenderFragment ChildContent { get; set; }
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
 
-    [Parameter] public FeedbackTarget Target { get; set; }
+    [Parameter]
+    public FeedbackTarget Target { get; set; }
 
     protected override void OnInitialized()
     {
         setSpinnerSize();
 
         setColorString();
-
 
         void setColorString()
         {
@@ -59,7 +67,7 @@ public partial class FeedbackArea
         }
     }
 
-    protected override async Task OnAfterRenderAsync(bool firstRender)
+    protected override void OnAfterRender(bool firstRender)
     {
         Target.FeedbackModel.ShowErrorMessage = false;
     }
