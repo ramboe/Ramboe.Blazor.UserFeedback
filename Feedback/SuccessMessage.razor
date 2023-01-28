@@ -1,38 +1,12 @@
 ﻿@using System.Text.RegularExpressions
 @using System.Web
-<div class="alert alert-success" style="max-width: @MaxWith; @marginbottom @margintop" role="alert">
-
-    @((MarkupString) Regex.Replace(HttpUtility.HtmlEncode(SuccessStatusText), "\r?\n|\r", "<br />"))
+<div class="alert alert-success" role="alert">
+    @((MarkupString) Regex.Replace(HttpUtility.HtmlEncode(Text), "\r?\n|\r", "<br />"))
 </div>
 
 @code {
 
     [Parameter]
-    public string SuccessStatusText { get; set; }
-
-    [Parameter]
-    public string MaxWith { get; set; }
-
-    [Parameter]
-    public string MarginBottom { get; set; }
-
-    [Parameter]
-    public string MarginTop { get; set; }
-
-    string marginbottom = string.Empty;
-    string margintop = string.Empty;
-
-
-    protected override async Task OnInitializedAsync()
-    {
-        if (!string.IsNullOrEmpty(MarginBottom))
-        {
-            marginbottom = $"margin-bottom: {MarginBottom};";
-        }
-        if (!string.IsNullOrEmpty(MarginTop))
-        {
-            margintop = $"margin-bottom: {MarginTop};";
-        }
-    }
+    public string Text { get; set; }
 
 }
