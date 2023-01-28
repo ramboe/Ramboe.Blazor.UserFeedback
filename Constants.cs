@@ -1,5 +1,8 @@
 ﻿namespace Ramboe.Blazor.UserFeedback;
 
+/// <summary>
+/// Spinner Sizes
+/// </summary>
 public enum SpinnerSizeMode
 {
     Small,
@@ -7,6 +10,9 @@ public enum SpinnerSizeMode
     Large
 }
     
+/// <summary>
+/// Spinner Colors
+/// </summary>
 public enum ColorMode
 {
     LightGrey,
