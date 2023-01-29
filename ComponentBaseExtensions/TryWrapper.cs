@@ -128,6 +128,18 @@ public class TryWrapper : ComponentBase
     }
 
     /// <summary>
+    /// This overload is a wrapper around TryWithLoadingMessageAsync
+    /// </summary>
+    /// <param name="asyncCall">Task to be executed</param>
+    /// <param name="feedbackTarget">target feedback area to show spinner animation</param>
+    /// <param name="loadingMessage">message that is displayed while the spinner is busy</param>
+    /// <param name="hideContent">determine whether content within feedback area shall be hidden or not</param>
+    protected async Task TryAsync(Func<Task> asyncCall, FeedbackTarget feedbackTarget, string loadingMessage, bool hideContent = false)
+    {
+        await TryWithLoadingMessageAsync(asyncCall, feedbackTarget, loadingMessage, hideContent);
+    }
+
+    /// <summary>
     /// Method to perform an asynchronous call and handle any errors that may occur. It takes in four parameters: an asyncCall (which is a function that returns a task), a feedbackTarget (which is an object that has methods for handling feedback during the async call), a loadingMessage (a string message to be displayed while loading), and an optional hideContent boolean. The method starts by turning on a "spin" on the feedbackTarget with the loading message provided and then calls the asyncCall. If the call is successful, it turns off the spin and displays the content. If an exception is caught, the method calls the DisplayError method on the feedbackTarget and passes in the exception and an optional hideContent boolean. The method also calls StateHasChanged twice, once before the asyncCall and once after.
     /// </summary>
     /// <param name="asyncCall">Task to be executed</param>
@@ -161,6 +173,20 @@ public class TryWrapper : ComponentBase
 
             return default(T);
         }
+    }
+
+    /// <summary>
+    /// This overload is a wrapper around TryWithLoadingMessageAsync
+    /// </summary>
+    /// <param name="asyncCall">Task to be executed</param>
+    /// <param name="feedbackTarget">target feedback area to show spinner animation</param>
+    /// <param name="loadingMessage">message that is displayed while the spinner is busy</param>
+    /// <param name="hideContent">determine whether content within feedback area shall be hidden or not</param>
+    /// <typeparam name="T">Type of the object that is returned by asyncCall</typeparam>
+    /// <returns>result of asyncCall</returns>
+    protected async Task<T> TryAsync<T>(Func<Task<T>> asyncCall, FeedbackTarget feedbackTarget, string loadingMessage, bool hideContent = false)
+    {
+        return await TryWithLoadingMessageAsync(asyncCall, feedbackTarget, loadingMessage, hideContent);
     }
 
     /// <summary>
@@ -200,5 +226,20 @@ public class TryWrapper : ComponentBase
 
             return default(T);
         }
+    }
+
+    /// <summary>
+    /// This overload is a wrapper around TryWithLoadingAndSuccessMessageAsync
+    /// </summary>
+    /// <param name="asyncCall">Task to be executed</param>
+    /// <param name="feedbackTarget">target feedback area to show spinner animation</param>
+    /// <param name="loadingMessage">message that is displayed while the spinner is busy</param>
+    /// <param name="successMessage">message that is displayed after asyncCall was successful</param>
+    /// <param name="hideContent">determine whether content within feedback area shall be hidden or not</param>
+    /// <typeparam name="T">Type of the object that is returned by asyncCall</typeparam>
+    /// <returns>result of asyncCall</returns>
+    protected async Task<T> TryAsync<T>(Func<Task<T>> asyncCall, FeedbackTarget feedbackTarget, string loadingMessage, string successMessage, bool hideContent = false)
+    {
+        return await TryWithLoadingAndSuccessMessageAsync(asyncCall, feedbackTarget, loadingMessage, successMessage, hideContent);
     }
 }
