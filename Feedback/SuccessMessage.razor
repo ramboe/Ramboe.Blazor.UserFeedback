@@ -1,12 +1,7 @@
 ﻿@using System.Text.RegularExpressions
 @using System.Web
-<div class="alert alert-success" role="alert">
-    @((MarkupString) Regex.Replace(HttpUtility.HtmlEncode(Text), "\r?\n|\r", "<br />"))
+@using Ramboe.Blazor.UserFeedback.ExtensionMethods
+
+<div class="alert alert-success">
+    @((MarkupString) Text.TransformLineBreaksIntoHtmlBr())
 </div>
-
-@code {
-
-    [Parameter]
-    public string Text { get; set; }
-
-}
