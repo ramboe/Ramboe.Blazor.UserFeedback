@@ -25,13 +25,11 @@ public class TryWrapper : ComponentBase
     protected void Try(Action methodCall, FeedbackTarget feedbackTarget, bool hideContent = false)
     {
         feedbackTarget.TurnSpinOn();
-
         StateHasChanged();
 
         try
         {
             methodCall();
-
             feedbackTarget.TurnSpinOffAndDisplayContent();
         }
         catch (Exception exc)
@@ -56,13 +54,11 @@ public class TryWrapper : ComponentBase
     protected async Task TryAsync(Func<Task> asyncCall, FeedbackTarget feedbackTarget, bool hideContent = false)
     {
         feedbackTarget.TurnSpinOn();
-
         await InvokeAsync(StateHasChanged);
 
         try
         {
             await asyncCall();
-
             feedbackTarget.TurnSpinOffAndDisplayContent();
         }
         catch (Exception exc)
@@ -93,15 +89,12 @@ public class TryWrapper : ComponentBase
     protected async Task<T> TryAsync<T>(Func<Task<T>> asyncCall, FeedbackTarget feedbackTarget, bool hideContent = false)
     {
         feedbackTarget.TurnSpinOn();
-
         await InvokeAsync(StateHasChanged);
 
         try
         {
             var result = await asyncCall();
-
             feedbackTarget.TurnSpinOffAndDisplayContent();
-
             await InvokeAsync(StateHasChanged);
 
             return result;
@@ -109,7 +102,6 @@ public class TryWrapper : ComponentBase
         catch (TaskCanceledException e)
         {
             feedbackTarget.TurnSpinOffAndDisplayContent();
-
             await InvokeAsync(StateHasChanged);
         }
         catch (Exception exc)
@@ -138,13 +130,11 @@ public class TryWrapper : ComponentBase
     protected async Task TryWithLoadingMessageAsync(Func<Task> asyncCall, FeedbackTarget feedbackTarget, string loadingMessage, bool hideContent = false)
     {
         feedbackTarget.TurnSpinOnWithLoadingMessage(loadingMessage);
-
         await InvokeAsync(StateHasChanged);
 
         try
         {
             await asyncCall();
-
             feedbackTarget.TurnSpinOffAndDisplayContent();
         }
         catch (Exception exc)
@@ -188,13 +178,11 @@ public class TryWrapper : ComponentBase
     protected async Task<T> TryWithLoadingMessageAsync<T>(Func<Task<T>> asyncCall, FeedbackTarget feedbackTarget, string loadingMessage, bool hideContent = false)
     {
         feedbackTarget.TurnSpinOnWithLoadingMessage(loadingMessage);
-
         await InvokeAsync(StateHasChanged);
 
         try
         {
             var result = await asyncCall();
-
             feedbackTarget.TurnSpinOffAndDisplayContent();
             await InvokeAsync(StateHasChanged);
 
@@ -203,9 +191,8 @@ public class TryWrapper : ComponentBase
         catch (Exception exc)
         {
             feedbackTarget.DisplayError(exc,
-                loadingMessage + "failed",
-                hideContent);
-
+            loadingMessage + "failed",
+            hideContent);
             await InvokeAsync(StateHasChanged);
 
             return default;
@@ -222,10 +209,8 @@ public class TryWrapper : ComponentBase
     /// <typeparam name="T">Type of the object that is returned by asyncCall</typeparam>
     /// <returns>result of asyncCall</returns>
     [DebuggerHidden]
-    protected async Task<T> TryAsync<T>(Func<Task<T>> asyncCall, FeedbackTarget feedbackTarget, string loadingMessage, bool hideContent = false)
-    {
-        return await TryWithLoadingMessageAsync(asyncCall, feedbackTarget, loadingMessage, hideContent);
-    }
+    protected async Task<T> TryAsync<T>(Func<Task<T>> asyncCall, FeedbackTarget feedbackTarget, string loadingMessage, bool hideContent = false) =>
+        await TryWithLoadingMessageAsync(asyncCall, feedbackTarget, loadingMessage, hideContent);
 
     /// <summary>
     ///     This is a slightly modified version of the C# method that is used to perform an asynchronous call and handle any
@@ -250,15 +235,12 @@ public class TryWrapper : ComponentBase
         bool hideContent = false)
     {
         feedbackTarget.TurnSpinOnWithLoadingMessage(loadingMessage);
-
         await InvokeAsync(StateHasChanged);
 
         try
         {
             var result = await asyncCall();
-
             feedbackTarget.DisplaySuccess(successMessage);
-
             await InvokeAsync(StateHasChanged);
 
             return result;
@@ -266,9 +248,8 @@ public class TryWrapper : ComponentBase
         catch (Exception exc)
         {
             feedbackTarget.DisplayError(exc,
-                loadingMessage + "failed",
-                hideContent);
-
+            loadingMessage + "failed",
+            hideContent);
             await InvokeAsync(StateHasChanged);
 
             return default;
@@ -286,8 +267,6 @@ public class TryWrapper : ComponentBase
     /// <typeparam name="T">Type of the object that is returned by asyncCall</typeparam>
     /// <returns>result of asyncCall</returns>
     [DebuggerHidden]
-    protected async Task<T> TryAsync<T>(Func<Task<T>> asyncCall, FeedbackTarget feedbackTarget, string loadingMessage, string successMessage, bool hideContent = false)
-    {
-        return await TryWithLoadingAndSuccessMessageAsync(asyncCall, feedbackTarget, loadingMessage, successMessage, hideContent);
-    }
+    protected async Task<T> TryAsync<T>(Func<Task<T>> asyncCall, FeedbackTarget feedbackTarget, string loadingMessage, string successMessage, bool hideContent = false) =>
+        await TryWithLoadingAndSuccessMessageAsync(asyncCall, feedbackTarget, loadingMessage, successMessage, hideContent);
 }

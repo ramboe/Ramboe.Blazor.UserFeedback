@@ -13,7 +13,7 @@ public partial class FeedbackArea
 
     [Parameter] public string ColorString { get; set; }
 
-    [Parameter] public string SpinnerMargin { get; set; } = "auto"; // "200px";
+    [Parameter] public string SpinnerMargin { get; set; } = "auto";// "200px";
 
     [Parameter] public string ErrorMaxWidth { get; set; } = "100%";
 
@@ -26,7 +26,6 @@ public partial class FeedbackArea
     protected override void OnInitialized()
     {
         setSpinnerSize();
-
         setColorString();
 
         void setColorString()

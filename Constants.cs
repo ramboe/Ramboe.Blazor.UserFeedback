@@ -9,7 +9,6 @@ public enum SpinnerSizeMode
     Medium,
     Large
 }
-
 /// <summary>
 ///     Spinner Colors
 /// </summary>

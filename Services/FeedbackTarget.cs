@@ -14,8 +14,7 @@ public class FeedbackTarget
 
     public FeedbackModel FeedbackModel { get; set; }
 
-
-    private void TurnAllMessagesOff()
+    void TurnAllMessagesOff()
     {
         FeedbackModel.ShowSuccessMessage = false;
         FeedbackModel.ShowErrorMessage = false;
@@ -26,13 +25,10 @@ public class FeedbackTarget
     public void DisplaySuccess(string Message, bool hideContent = false)
     {
         TurnSpinOffAndDisplayContent();
-
         FeedbackModel.ShowSuccessMessage = true;
         FeedbackModel.SuccessStatusText = Message;
-
         FeedbackModel.ShowErrorMessage = false;
         FeedbackModel.ShowAlertMessage = false;
-
         FeedbackModel.ShowContent = !hideContent;
     }
 
@@ -40,7 +36,6 @@ public class FeedbackTarget
     public void DisplayAlert(string Message)
     {
         TurnSpinOffAndDisplayContent();
-
         FeedbackModel.ShowAlertMessage = true;
         FeedbackModel.AlertStatusText = Message;
     }
@@ -55,7 +50,6 @@ public class FeedbackTarget
     public void HideAlert()
     {
         TurnSpinOffAndDisplayContent();
-
         FeedbackModel.ShowAlertMessage = false;
     }
 
@@ -63,7 +57,6 @@ public class FeedbackTarget
     public void HideSuccess()
     {
         TurnSpinOffAndDisplayContent();
-
         FeedbackModel.ShowSuccessMessage = false;
     }
 
@@ -87,10 +80,8 @@ public class FeedbackTarget
         }
 
         setFeedbackUpForError(message);
-
         FeedbackModel.ShowContent = !hideContent;
     }
-
 
     [DebuggerHidden]
     public void DisplayError(string messageAsString, bool hideContent = false)
@@ -100,13 +91,11 @@ public class FeedbackTarget
             Inner = messageAsString,
             Reference = "blazor"
         };
-
         setFeedbackUpForError(message);
-
         FeedbackModel.ShowContent = !hideContent;
     }
 
-    private void setFeedbackUpForError(BlazorExceptionModel? message)
+    void setFeedbackUpForError(BlazorExceptionModel? message)
     {
         FeedbackModel.ShowContent = false;
         FeedbackModel.ShowSpinner = false;
@@ -122,11 +111,10 @@ public class FeedbackTarget
             Inner = messageAsString,
             Reference = "blazor"
         };
-
         SetupForErrorButDisplayContent(message);
     }
 
-    private void SetupForErrorButDisplayContent(BlazorExceptionModel message)
+    void SetupForErrorButDisplayContent(BlazorExceptionModel message)
     {
         FeedbackModel.ShowContent = true;
         FeedbackModel.ShowSpinner = false;
@@ -159,7 +147,6 @@ public class FeedbackTarget
     public void TurnSpinOn()
     {
         FeedbackModel.LoadingMessage = string.Empty;
-
         TurnFeedbackOn();
     }
 
@@ -174,14 +161,12 @@ public class FeedbackTarget
         TurnFeedbackOn();
     }
 
-    [DebuggerHidden]
-    private void TurnFeedbackOn()
+    [DebuggerHidden] void TurnFeedbackOn()
     {
         FeedbackModel.ShowSuccessMessage = false;
         FeedbackModel.ShowContent = false;
         FeedbackModel.ShowSpinner = true;
     }
-
 
     /// <summary>
     ///     Displays a message to the user while loading content

@@ -8,16 +8,15 @@ namespace Ramboe.Blazor.UserFeedback;
 //
 // This class can be registered as scoped DI service and then injected into Blazor
 // components for use.
-
 public class ExampleJsInterop : IAsyncDisposable
 {
-    private readonly Lazy<Task<IJSObjectReference>> moduleTask;
+    readonly Lazy<Task<IJSObjectReference>> moduleTask;
 
     public ExampleJsInterop(IJSRuntime jsRuntime)
     {
         moduleTask = new Lazy<Task<IJSObjectReference>>(() => jsRuntime.InvokeAsync<IJSObjectReference>(
-            "import",
-            "./_content/Ramboe.Blazor.UserFeedback/exampleJsInterop.js").AsTask());
+        "import",
+        "./_content/Ramboe.Blazor.UserFeedback/exampleJsInterop.js").AsTask());
     }
 
     public async ValueTask DisposeAsync()
