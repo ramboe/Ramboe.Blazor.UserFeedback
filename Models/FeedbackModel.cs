@@ -1,7 +1,7 @@
 ﻿namespace Ramboe.Blazor.UserFeedback.Models;
 
 /// <summary>
-/// Represents the current feedback state
+///     Represents the current feedback state
 /// </summary>
 public class FeedbackModel
 {

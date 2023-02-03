@@ -5,32 +5,23 @@ namespace Ramboe.Blazor.UserFeedback;
 
 public partial class FeedbackArea
 {
-    [Parameter]
-    public string SpinnerSizeInRem { get; set; }
+    [Parameter] public string SpinnerSizeInRem { get; set; }
 
-    [Parameter]
-    public SpinnerSizeMode SpinnerSize { get; set; } = SpinnerSizeMode.Medium;
+    [Parameter] public SpinnerSizeMode SpinnerSize { get; set; } = SpinnerSizeMode.Medium;
 
-    [Parameter]
-    public ColorMode Color { get; set; } = ColorMode.DarkGrey;
+    [Parameter] public ColorMode Color { get; set; } = ColorMode.DarkGrey;
 
-    [Parameter]
-    public string ColorString { get; set; }
+    [Parameter] public string ColorString { get; set; }
 
-    [Parameter]
-    public string SpinnerMargin { get; set; } = "auto"; // "200px";
+    [Parameter] public string SpinnerMargin { get; set; } = "auto"; // "200px";
 
-    [Parameter]
-    public string ErrorMaxWidth { get; set; } = "100%";
+    [Parameter] public string ErrorMaxWidth { get; set; } = "100%";
 
-    [Parameter]
-    public string ErrorMarginBottom { get; set; } = string.Empty;
+    [Parameter] public string ErrorMarginBottom { get; set; } = string.Empty;
 
-    [Parameter]
-    public RenderFragment ChildContent { get; set; }
+    [Parameter] public RenderFragment ChildContent { get; set; }
 
-    [Parameter]
-    public FeedbackTarget Target { get; set; }
+    [Parameter] public FeedbackTarget Target { get; set; }
 
     protected override void OnInitialized()
     {
@@ -40,9 +31,15 @@ public partial class FeedbackArea
 
         void setColorString()
         {
-            if (Color == null) return;
+            if (Color == null)
+            {
+                return;
+            }
 
-            if (string.IsNullOrEmpty(ColorString)) return;
+            if (string.IsNullOrEmpty(ColorString))
+            {
+                return;
+            }
 
             ColorString = Color switch
             {
@@ -55,7 +52,10 @@ public partial class FeedbackArea
 
         void setSpinnerSize()
         {
-            if (!string.IsNullOrEmpty(SpinnerSizeInRem) || SpinnerSize == null) return;
+            if (!string.IsNullOrEmpty(SpinnerSizeInRem) || SpinnerSize == null)
+            {
+                return;
+            }
 
             SpinnerSizeInRem = SpinnerSize switch
             {

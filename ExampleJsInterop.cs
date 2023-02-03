@@ -15,14 +15,9 @@ public class ExampleJsInterop : IAsyncDisposable
 
     public ExampleJsInterop(IJSRuntime jsRuntime)
     {
-        moduleTask = new(() => jsRuntime.InvokeAsync<IJSObjectReference>(
-            "import", "./_content/Ramboe.Blazor.UserFeedback/exampleJsInterop.js").AsTask());
-    }
-
-    public async ValueTask<string> Prompt(string message)
-    {
-        var module = await moduleTask.Value;
-        return await module.InvokeAsync<string>("showPrompt", message);
+        moduleTask = new Lazy<Task<IJSObjectReference>>(() => jsRuntime.InvokeAsync<IJSObjectReference>(
+            "import",
+            "./_content/Ramboe.Blazor.UserFeedback/exampleJsInterop.js").AsTask());
     }
 
     public async ValueTask DisposeAsync()
@@ -32,5 +27,12 @@ public class ExampleJsInterop : IAsyncDisposable
             var module = await moduleTask.Value;
             await module.DisposeAsync();
         }
+    }
+
+    public async ValueTask<string> Prompt(string message)
+    {
+        var module = await moduleTask.Value;
+
+        return await module.InvokeAsync<string>("showPrompt", message);
     }
 }

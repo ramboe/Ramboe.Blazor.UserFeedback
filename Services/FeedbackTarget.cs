@@ -1,26 +1,28 @@
-﻿using System.Text.Json;
+﻿using System.Diagnostics;
+using System.Text.Json;
 using Ramboe.Blazor.UserFeedback.Models;
 
 namespace Ramboe.Blazor.UserFeedback.Services;
 
 public class FeedbackTarget
 {
-    public FeedbackModel FeedbackModel { get; set; }
-
     public FeedbackTarget()
     {
         FeedbackModel = new FeedbackModel();
         TurnSpinOffAndDisplayContent();
     }
 
+    public FeedbackModel FeedbackModel { get; set; }
 
-    void TurnAllMessagesOff()
+
+    private void TurnAllMessagesOff()
     {
         FeedbackModel.ShowSuccessMessage = false;
         FeedbackModel.ShowErrorMessage = false;
         FeedbackModel.ShowAlertMessage = false;
     }
 
+    [DebuggerHidden]
     public void DisplaySuccess(string Message, bool hideContent = false)
     {
         TurnSpinOffAndDisplayContent();
@@ -34,6 +36,7 @@ public class FeedbackTarget
         FeedbackModel.ShowContent = !hideContent;
     }
 
+    [DebuggerHidden]
     public void DisplayAlert(string Message)
     {
         TurnSpinOffAndDisplayContent();
@@ -42,11 +45,13 @@ public class FeedbackTarget
         FeedbackModel.AlertStatusText = Message;
     }
 
+    [DebuggerHidden]
     public void HideContent()
     {
         FeedbackModel.ShowContent = false;
     }
 
+    [DebuggerHidden]
     public void HideAlert()
     {
         TurnSpinOffAndDisplayContent();
@@ -54,6 +59,7 @@ public class FeedbackTarget
         FeedbackModel.ShowAlertMessage = false;
     }
 
+    [DebuggerHidden]
     public void HideSuccess()
     {
         TurnSpinOffAndDisplayContent();
@@ -61,6 +67,7 @@ public class FeedbackTarget
         FeedbackModel.ShowSuccessMessage = false;
     }
 
+    [DebuggerHidden]
     public void DisplayError(Exception exception, string additionalMessage = "", bool hideContent = false)
     {
         var message = new BlazorExceptionModel();
@@ -85,6 +92,7 @@ public class FeedbackTarget
     }
 
 
+    [DebuggerHidden]
     public void DisplayError(string messageAsString, bool hideContent = false)
     {
         var message = new BlazorExceptionModel
@@ -98,7 +106,7 @@ public class FeedbackTarget
         FeedbackModel.ShowContent = !hideContent;
     }
 
-    void setFeedbackUpForError(BlazorExceptionModel? message)
+    private void setFeedbackUpForError(BlazorExceptionModel? message)
     {
         FeedbackModel.ShowContent = false;
         FeedbackModel.ShowSpinner = false;
@@ -106,6 +114,7 @@ public class FeedbackTarget
         FeedbackModel.Error = message;
     }
 
+    [DebuggerHidden]
     public void DisplayErrorWithContent(string messageAsString)
     {
         var message = new BlazorExceptionModel
@@ -117,7 +126,7 @@ public class FeedbackTarget
         SetupForErrorButDisplayContent(message);
     }
 
-    void SetupForErrorButDisplayContent(BlazorExceptionModel message)
+    private void SetupForErrorButDisplayContent(BlazorExceptionModel message)
     {
         FeedbackModel.ShowContent = true;
         FeedbackModel.ShowSpinner = false;
@@ -125,6 +134,7 @@ public class FeedbackTarget
         FeedbackModel.Error = message;
     }
 
+    [DebuggerHidden]
     public void DisplayErrorWithContent(Exception exception, string additionalMessage = "")
     {
         var message = new BlazorExceptionModel();
@@ -145,6 +155,7 @@ public class FeedbackTarget
         SetupForErrorButDisplayContent(message);
     }
 
+    [DebuggerHidden]
     public void TurnSpinOn()
     {
         FeedbackModel.LoadingMessage = string.Empty;
@@ -152,6 +163,7 @@ public class FeedbackTarget
         TurnFeedbackOn();
     }
 
+    [DebuggerHidden]
     public void TurnSpinOn(string loadingMessage)
     {
         if (!string.IsNullOrEmpty(loadingMessage))
@@ -162,7 +174,8 @@ public class FeedbackTarget
         TurnFeedbackOn();
     }
 
-    void TurnFeedbackOn()
+    [DebuggerHidden]
+    private void TurnFeedbackOn()
     {
         FeedbackModel.ShowSuccessMessage = false;
         FeedbackModel.ShowContent = false;
@@ -171,26 +184,19 @@ public class FeedbackTarget
 
 
     /// <summary>
-    /// Displays a message to the user while loading content
+    ///     Displays a message to the user while loading content
     /// </summary>
     /// <param name="loadingMessage"></param>
+    [DebuggerHidden]
     public void TurnSpinOnWithLoadingMessage(string loadingMessage)
     {
         TurnSpinOn(loadingMessage);
     }
 
+    [DebuggerHidden]
     public void TurnSpinOffAndDisplayContent()
     {
         FeedbackModel.ShowContent = true;
         FeedbackModel.ShowSpinner = false;
     }
-
-    #region utility
-    void turnSpinOnInternal()
-    {
-        TurnAllMessagesOff();
-
-        FeedbackModel.ShowSpinner = true;
-    }
-    #endregion
 }

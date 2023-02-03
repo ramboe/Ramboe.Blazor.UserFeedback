@@ -4,6 +4,5 @@ namespace Ramboe.Blazor.UserFeedback.Feedback;
 
 public partial class SuccessMessage
 {
-    [Parameter]
-    public string Text { get; set; }
+    [Parameter] public string Text { get; set; }
 }
