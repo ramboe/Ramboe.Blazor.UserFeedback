@@ -18,3 +18,8 @@ public enum ColorMode
     DarkGrey,
     Black
 }
+public enum SpinnerType
+{
+    BorderSpinner,
+    GrowingSpiner
+}

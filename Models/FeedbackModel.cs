@@ -1,7 +1,7 @@
 ﻿namespace Ramboe.Blazor.UserFeedback.Models;
 
 /// <summary>
-///     Represents the current feedback state
+/// Represents the current feedback state
 /// </summary>
 public class FeedbackModel
 {
@@ -23,6 +23,7 @@ public class FeedbackModel
 
     public string AlertStatusText { get; set; }
 }
+
 public class BlazorExceptionModel
 {
     public string Inner { get; set; }

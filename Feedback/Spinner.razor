@@ -1,5 +1,5 @@
 ﻿<div class="d-flex justify-content-center align-items-center">
-    <div class="spinner-border" style="width: @SpinnerSizeInRem; height: @SpinnerSizeInRem; margin:@SpinnerMargin; margin-top: 0px; margin-bottom: 0px; color: @ColorString !important;" role="status">
+    <div class="@SpinnerType" style="width: @SpinnerSizeInRem; height: @SpinnerSizeInRem; margin:@SpinnerMargin; margin-top: 0px; margin-bottom: 0px; color: @ColorString !important;" role="status">
     </div>
 </div>
 
@@ -8,6 +8,8 @@
     [Parameter] public string SpinnerSizeInRem { get; set; }
 
     [Parameter] public string SpinnerMargin { get; set; }
+
+    [Parameter] public string SpinnerType { get; set; } = "spinner-border";
 
     [Parameter] public string ColorString { get; set; } = "#4c4c4c";
 
