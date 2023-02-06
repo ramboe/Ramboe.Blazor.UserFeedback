@@ -1,6 +1,14 @@
 ﻿<div class="d-flex justify-content-center align-items-center">
-    <div class="@SpinnerType" style="width: @SpinnerSizeInRem; height: @SpinnerSizeInRem; margin:@SpinnerMargin; margin-top: 0px; margin-bottom: 0px; color: @ColorString !important;" role="status">
-    </div>
+    @if (string.IsNullOrEmpty(ColorHex) is false)
+    {
+        <div class="@SpinnerType" style="width: @SpinnerSizeInRem; height: @SpinnerSizeInRem; margin: @SpinnerMargin; margin-top: 0px; margin-bottom: 0px; color: @ColorHex !important;" role="status">
+        </div>
+    }
+    else
+    {
+        <div class="@SpinnerType @ColorClass" style="width: @SpinnerSizeInRem; height: @SpinnerSizeInRem; margin: @SpinnerMargin; margin-top: 0px; margin-bottom: 0px;" role="status">
+        </div>
+    }
 </div>
 
 @code{
@@ -9,8 +17,10 @@
 
     [Parameter] public string SpinnerMargin { get; set; }
 
-    [Parameter] public string SpinnerType { get; set; } = "spinner-border";
+    [Parameter] public string SpinnerType { get; set; }
 
-    [Parameter] public string ColorString { get; set; } = "#4c4c4c";
+    [Parameter] public string ColorClass { get; set; }
+
+    [Parameter] public string ColorHex { get; set; }
 
 }

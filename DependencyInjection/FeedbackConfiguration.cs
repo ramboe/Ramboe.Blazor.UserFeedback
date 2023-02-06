@@ -4,7 +4,10 @@ public class FeedbackConfiguration
 {
     public SpinnerSizeMode SpinnerSizeMode { get; set; }
 
-    public ColorMode ColorMode { get; set; }
+    public SpinnerColorMode SpinnerColorMode { get; set; }
 
-    public SpinnerType SpinnerType { get; set; }
+    public SpinnerTypeMode SpinnerTypeMode { get; set; }
+
+    public string SpinnerSizeInRem { get; set; }
+    public string ColorHex { get; set; }
 }

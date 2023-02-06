@@ -17,7 +17,7 @@ public partial class FeedbackArea
 
     [Parameter] public string SpinnerSizeInRem { get; set; }
 
-    [Parameter] public string ColorString { get; set; }
+    [Parameter] public string ColorHexFromParams { get; set; }
 
     [Parameter] public string SpinnerTypeString { get; set; }
     #endregion
@@ -25,86 +25,119 @@ public partial class FeedbackArea
     #region enums
     [Parameter] public SpinnerSizeMode? SpinnerSizeFromParams { get; set; }
 
-    [Parameter] public ColorMode? ColorModeFromParams { get; set; }
+    [Parameter] public SpinnerColorMode? ColorModeFromParams { get; set; }
 
-    [Parameter] public SpinnerType? SpinnerTypeFromParams { get; set; }
+    [Parameter] public SpinnerTypeMode? SpinnerTypeFromParams { get; set; }
+    #endregion
 
     [Parameter] public RenderFragment ChildContent { get; set; }
-    #endregion
 
     [Parameter] public FeedbackTarget Target { get; set; }
 
+    public string ColorClass { get; set; }
+
     protected override void OnInitialized()
     {
-        SpinnerSizeInRem = setSpinnerSize();
-        SpinnerTypeString = setSpinnerType();
-        ColorString = setColorString();
+        SpinnerSizeInRem = setSpinnerSize(SpinnerSizeInRem, FeedbackConfiguration.SpinnerSizeMode, SpinnerSizeFromParams);
+        SpinnerTypeString = setSpinnerType(SpinnerTypeString, FeedbackConfiguration.SpinnerTypeMode, SpinnerTypeFromParams);
+        ColorClass = setColorString(ColorClass, FeedbackConfiguration.SpinnerColorMode, ColorModeFromParams);
 
-        string setColorString()
+        string setColorString(string colorClass, SpinnerColorMode feedbackConfigurationColorMode, SpinnerColorMode? colorModeFromParams)
         {
-            if (string.IsNullOrEmpty(ColorString) is false)
+            if (string.IsNullOrEmpty(ColorHexFromParams) is false)
             {
-                return ColorString;
+                return null;
             }
 
-            var colormode = FeedbackConfiguration.ColorMode;
-
-            if (ColorModeFromParams is not null)
+            if (string.IsNullOrEmpty(FeedbackConfiguration.ColorHex) is false && colorModeFromParams is null)
             {
-                colormode = (ColorMode) ColorModeFromParams;
+                ColorHexFromParams = FeedbackConfiguration.ColorHex;
+
+                return null;
+            }
+
+            if (string.IsNullOrEmpty(colorClass) is false)
+            {
+                return colorClass;
+            }
+
+            var colormode = feedbackConfigurationColorMode;
+
+            if (colorModeFromParams is not null)
+            {
+                colormode = (SpinnerColorMode) colorModeFromParams;
             }
 
             return colormode switch
             {
-                ColorMode.LightGrey => "#D3D3D3FF",
-                ColorMode.DarkGrey => "#2C2C2CFF",
-                ColorMode.Black => "#000000",
-                var _ => "#4c4c4c"
+                SpinnerColorMode.Primary => "text-primary",
+                SpinnerColorMode.Secondary => "text-secondary",
+                SpinnerColorMode.Success => "text-success",
+                SpinnerColorMode.Danger => "text-danger",
+                SpinnerColorMode.Warning => "text-warning",
+                SpinnerColorMode.Info => "text-info",
+                SpinnerColorMode.Light => "text-light",
+                SpinnerColorMode.Dark => "text-dark",
+                var _ => "text-secondary"
             };
         }
 
-        string setSpinnerType()
+        string setSpinnerType(string spinnerTypeString, SpinnerTypeMode feedbackConfigurationSpinnerType, SpinnerTypeMode? spinnerTypeFromParams)
         {
-            if (string.IsNullOrEmpty(SpinnerTypeString) is false)
+            if (string.IsNullOrEmpty(spinnerTypeString) is false)
             {
-                return SpinnerTypeString;
+                return spinnerTypeString;
             }
 
-            var spinnertype = FeedbackConfiguration.SpinnerType;
+            var spinnertype = feedbackConfigurationSpinnerType;
 
-            if (SpinnerTypeFromParams is not null)
+            if (spinnerTypeFromParams is not null)
             {
-                spinnertype = (SpinnerType) SpinnerTypeFromParams;
+                spinnertype = (SpinnerTypeMode) spinnerTypeFromParams;
             }
 
             return spinnertype switch
             {
-                SpinnerType.BorderSpinner => "spinner-border",
-                SpinnerType.GrowingSpiner => "spinner-grow",
-                var _ => SpinnerTypeString
+                SpinnerTypeMode.BorderSpinner => "spinner-border",
+                SpinnerTypeMode.GrowingSpiner => "spinner-grow",
+                var _ => spinnerTypeString
             };
         }
 
-        string setSpinnerSize()
+        string setSpinnerSize(string spinnerSizeInRem, SpinnerSizeMode feedbackConfigurationSpinnerSizeMode, SpinnerSizeMode? spinnerSizeFromParams)
         {
-            if (string.IsNullOrEmpty(SpinnerSizeInRem) is false)
+            if (string.IsNullOrEmpty(spinnerSizeInRem) is false)
             {
-                return SpinnerSizeInRem;
+                return spinnerSizeInRem;
             }
 
-            var spinnertype = FeedbackConfiguration.SpinnerSizeMode;
-
-            if (SpinnerSizeFromParams is not null)
+            if (string.IsNullOrEmpty(FeedbackConfiguration.SpinnerSizeInRem) is false)
             {
-                spinnertype = (SpinnerSizeMode) SpinnerSizeFromParams;
+                return FeedbackConfiguration.SpinnerSizeInRem;
+            }
+
+            var spinnertype = feedbackConfigurationSpinnerSizeMode;
+
+            if (spinnerSizeFromParams is not null)
+            {
+                spinnertype = (SpinnerSizeMode) spinnerSizeFromParams;
             }
 
             return spinnertype switch
             {
-                SpinnerSizeMode.Small => "2rem",
-                SpinnerSizeMode.Medium => "4rem",
-                SpinnerSizeMode.Large => "8rem",
-                var _ => SpinnerSizeInRem
+                SpinnerSizeMode.Vh90 => "90vh",
+                SpinnerSizeMode.Vh80 => "80vh",
+                SpinnerSizeMode.Vh70 => "70vh",
+                SpinnerSizeMode.Vh60 => "60vh",
+                SpinnerSizeMode.Vh50 => "50vh",
+                SpinnerSizeMode.Vh40 => "40vh",
+                SpinnerSizeMode.Vh30 => "30vh",
+                SpinnerSizeMode.Vh20 => "20vh",
+                SpinnerSizeMode.Vh10 => "10vh",
+                SpinnerSizeMode.Vh5 => "5vh",
+                SpinnerSizeMode.Vh3 => "3vh",
+                SpinnerSizeMode.Vh2 => "2vh",
+                var _ => spinnerSizeInRem
             };
         }
     }

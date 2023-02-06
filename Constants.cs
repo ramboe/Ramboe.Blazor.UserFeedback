@@ -5,20 +5,34 @@
 /// </summary>
 public enum SpinnerSizeMode
 {
-    Small,
-    Medium,
-    Large
+    Vh90,
+    Vh80,
+    Vh70,
+    Vh60,
+    Vh50,
+    Vh40,
+    Vh30,
+    Vh20,
+    Vh10,
+    Vh5,
+    Vh3,
+    Vh2
 }
 /// <summary>
 ///     Spinner Colors
 /// </summary>
-public enum ColorMode
+public enum SpinnerColorMode
 {
-    LightGrey,
-    DarkGrey,
-    Black
+    Primary,
+    Secondary,
+    Success,
+    Danger,
+    Warning,
+    Info,
+    Light,
+    Dark
 }
-public enum SpinnerType
+public enum SpinnerTypeMode
 {
     BorderSpinner,
     GrowingSpiner
