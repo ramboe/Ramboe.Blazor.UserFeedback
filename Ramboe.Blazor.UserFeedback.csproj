@@ -4,6 +4,15 @@
         <TargetFramework>net7.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <Title>Ramboe.Blazor.UserFeedback</Title>
+        <Authors>Clemens Kruse</Authors>
+        <Description>Ramboe UserFeedback - A library for showing spinners, error and success messages during asynchronous method calls. This framework simplifies the handling of asynchronous UI updates, allowing developers to focus on their core logic and providing a seamless user experience. 
+With its easy-to-use API, this library makes it simple to display spinners, error messages, and success messages for asynchronous method calls. Give your users the feedback they need, without sacrificing simplicity or performance.</Description>
+        <PackageProjectUrl>https://github.com/ramboe/Ramboe.Blazor.UserFeedback</PackageProjectUrl>
+        <PackageIcon>logo-icon.png</PackageIcon>
+        <RepositoryUrl>https://github.com/ramboe/Ramboe.Blazor.UserFeedback</RepositoryUrl>
+        <PackageTags>blazor aspnet csharp</PackageTags>
     </PropertyGroup>
 
 
@@ -13,6 +22,13 @@
 
     <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="logo-icon.png">
+        <Pack>True</Pack>
+        <PackagePath></PackagePath>
+      </None>
     </ItemGroup>
 
 </Project>
