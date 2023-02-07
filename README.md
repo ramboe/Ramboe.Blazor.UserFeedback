@@ -4,6 +4,12 @@ Ramboe UserFeedback - A Blazor library for showing spinners, error and success m
 
 With its easy-to-use API, this library makes it simple to display spinners, error messages, and success messages for asynchronous method calls. Give your users the feedback they need, without sacrificing simplicity or performance.  
 
+## Add the nuget package to your blazor server / wasm project
+
+```
+dotnet add package Ramboe.Blazor.UserFeedback --version 1.0.0
+```
+
 ## Functionality  
 
 The basic functionality is to display a spinner while a function is executed  
