@@ -98,11 +98,11 @@ Feedback areas need to be configured at startup. You can use the AddStandardFeed
 
 which applies the following configuration  
 
-SpinnerSizeMode = SpinnerSizeMode.**Vh5**,  
+* SpinnerSizeMode = SpinnerSizeMode.**Vh5**,  
 
-ColorMode = ColorMode.**Primary**,  
+* ColorMode = ColorMode.**Primary**,  
 
-SpinnerType = SpinnerType.**BorderSpinner**  
+* SpinnerType = SpinnerType.**BorderSpinner**  
 
 you can also use fluent api that comes along with AddAndConfigureFeedbackAreas() if you want to configure the styling yourself  
 
